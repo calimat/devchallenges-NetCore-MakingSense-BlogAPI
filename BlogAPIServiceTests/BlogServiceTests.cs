@@ -1,32 +1,13 @@
 using System;
 using System.Collections.Generic;
+using BlogAPI.Model;
+using BlogAPI.Services;
 using Moq;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class BlogService
-    {
-        private readonly List<Post> _posts;
-
-        public BlogService(List<Post> posts)
-        {
-            _posts = posts;
-        }
-
-        public List<Post> GetAll()
-        {
-            return _posts; 
-        }
-    }
-
-    public class Post
-    {
-
-    }
-
-
-   
+  
     public class BlogServiceTests
     {
         public Post mockPost { get; set; }
