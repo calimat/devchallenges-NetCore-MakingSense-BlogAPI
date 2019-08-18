@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BlogAPI.Model;
 
 namespace BlogAPI.Services
@@ -23,6 +24,12 @@ namespace BlogAPI.Services
             var newPost = new Post(title, content);
             _posts.Add(newPost);
             return new Post(title, content);
+        }
+
+        public void Delete(Guid id)
+        {
+            var post = _posts.SingleOrDefault(x => x.id == id);           
+            _posts.Remove(post);
         }
     }
 }

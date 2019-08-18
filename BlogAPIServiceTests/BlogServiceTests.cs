@@ -82,5 +82,16 @@ namespace Tests
             var secondPost = sut.Create("Title for Created Post", "Content");
             Assert.AreEqual(sut.GetAll().Count, 2);
         }
+
+        [Test]
+        public void BlogServiceDeletesPost_FromTwoPostModel_ShouldReturnOne()
+        {
+            listOfPostMock.Add(mockPost);
+            listOfPostMock.Add(new Post("Second Post", "Second Content"));
+
+            sut.Delete(mockPost.id);
+
+            Assert.AreEqual(listOfPostMock.Count, 1);
+        }
     }
 }
