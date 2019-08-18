@@ -1,14 +1,22 @@
 using System;
 using System.Collections.Generic;
+using Moq;
 using NUnit.Framework;
 
 namespace Tests
 {
     public class BlogService
     {
-        public List<Post> Get()
+        private readonly List<Post> _posts;
+
+        public BlogService(List<Post> posts)
         {
-            return new List<Post>();
+            _posts = posts;
+        }
+
+        public List<Post> GetAll()
+        {
+            return _posts; 
         }
     }
 
@@ -17,22 +25,48 @@ namespace Tests
 
     }
 
+
+   
     public class BlogServiceTests
     {
-        [Test]
-        public void BlogService_ShouldNotBeNull()
+        public Post mockPost { get; set; }
+        public List<Post> listOfPostMock { get; set; }
+        public BlogService sut { get; set; }
+
+        [SetUp]
+        public void Setup()
         {
-            var sut =  new BlogService();
-            Assert.IsNotNull(sut);
+            mockPost = new Post();
+            listOfPostMock = new List<Post>();
+            sut = new BlogService(listOfPostMock);
+
         }
 
-       
         [Test]
         public void BlogService_ShouldReturnAListOfPosts()
         {
-            var sut = new BlogService();
-            var result = sut.Get();
+            
+            var result = sut.GetAll();
             Assert.IsInstanceOf<List<Post>>(result);
+            
         }
+
+        [Test]
+        public void BlogService_ListOfPostHasOneReturnsOne()
+        {
+            listOfPostMock.Add(mockPost);
+            var result = sut.GetAll();
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test]
+        public void BlogService_ListOfPostHasTwoReturnsTwo()
+        {
+            listOfPostMock.Add(mockPost);
+            listOfPostMock.Add(mockPost);
+            var result = sut.GetAll();
+            Assert.AreEqual(2, result.Count);
+        }
+
     }
 }
