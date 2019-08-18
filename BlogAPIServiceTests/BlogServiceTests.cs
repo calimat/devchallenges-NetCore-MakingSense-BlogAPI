@@ -13,13 +13,16 @@ namespace Tests
         public Post mockPost { get; set; }
         public List<Post> listOfPostMock { get; set; }
         public BlogService sut { get; set; }
+        public Guid id { get; set; }
 
         [SetUp]
         public void Setup()
         {
-            mockPost = new Post();
+            
+            mockPost = new Post("TestPost", "TestPostContent");
             listOfPostMock = new List<Post>();
             sut = new BlogService(listOfPostMock);
+            id = Guid.NewGuid();
 
         }
 
@@ -52,11 +55,32 @@ namespace Tests
         [Test]
         public void BlogServiceCreatesPost_ReturnsNotNullPost()
         {
-            var guid = new Guid();
-            var post = sut.Create(guid, "TitleForPost", "Content");
+            var post = sut.Create("TitleForPost", "Content");
             Assert.IsNotNull(post);
             
         }
 
+        [Test]
+        public void BlogServiceCreatesPost_ReturnsTitleAndContentCreated()
+        {
+            var resultPost = sut.Create("Title for Created Post", "Content");
+            Assert.AreEqual(resultPost.title, "Title for Created Post");
+            Assert.AreEqual(resultPost.content, "Content");
+        }
+
+        [Test]
+        public void BlogServiceCreatesOnePost_IncrementsTheListByOne()
+        {
+            var resultPost = sut.Create("Title for Created Post", "Content");
+            Assert.AreEqual(sut.GetAll().Count, 1); 
+        }
+
+        [Test]
+        public void BlogServiceCreatesTwoPosts_IncrementsTheListByTwo()
+        {
+            var resultPost = sut.Create("Title for Created Post", "Content");
+            var secondPost = sut.Create("Title for Created Post", "Content");
+            Assert.AreEqual(sut.GetAll().Count, 2);
+        }
     }
 }
