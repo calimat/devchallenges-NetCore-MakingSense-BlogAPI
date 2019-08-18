@@ -49,5 +49,14 @@ namespace Tests
             Assert.AreEqual(2, result.Count);
         }
 
+        [Test]
+        public void BlogServiceCreatesPost_ReturnsNotNullPost()
+        {
+            var guid = new Guid();
+            var post = sut.Create(guid, "TitleForPost", "Content");
+            Assert.IsNotNull(post);
+            
+        }
+
     }
 }

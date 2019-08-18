@@ -17,5 +17,10 @@ namespace BlogAPI.Services
         {
             return _posts;
         }
+
+        public Post Create(Guid id, string title, string content)
+        {
+            return new Post();
+        }
     }
 }
