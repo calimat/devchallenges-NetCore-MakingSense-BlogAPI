@@ -5,18 +5,18 @@ using BlogAPI.Model;
 
 namespace BlogAPI.Services
 {
-    public class BlogService
+    public class BlogService:IBlogService
     {
         private readonly List<Post> _posts;
-
-        public BlogService(List<Post> posts)
-        {
-            _posts = posts;
-        }
 
         public List<Post> GetAll()
         {
             return _posts;
+        }          
+
+        public BlogService(List<Post> posts)
+        {
+            _posts = posts;
         }
 
         public Post Create(string title, string content)
@@ -32,4 +32,17 @@ namespace BlogAPI.Services
             _posts.Remove(post);
         }
     }
+
+    public interface IBlogService
+    {
+         List<Post> GetAll();
+
+         Post Create(string title, string content);
+
+         void Delete(Guid id);
+
+         
+    }
+
+    
 }

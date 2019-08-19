@@ -17,6 +17,7 @@
     <Reference Include="Microsoft.AspNetCore.Mvc.Core">
       <HintPath>..\..\..\..\..\usr\local\share\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlogAPI\BlogAPI.csproj" />

@@ -22,6 +22,7 @@ namespace Tests
             mockPost = new Post("TestPost", "TestPostContent");
             listOfPostMock = new List<Post>();
             sut = new BlogService(listOfPostMock);
+            
             id = Guid.NewGuid();
 
         }
@@ -30,8 +31,8 @@ namespace Tests
         public void BlogService_ShouldReturnAListOfPosts()
         {
             
-            var result = sut.GetAll();
-            Assert.IsInstanceOf<List<Post>>(result);
+            var result = sut.GetAll();            
+            Assert.IsNotNull(result);
             
         }
 
